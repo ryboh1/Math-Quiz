@@ -4,12 +4,12 @@ body {
   min-height: 100vh;
 }
 body #block {
-  background-color: grey;
-  color: white;
+  background-color: white;
+  color: black;
   width: 400px;
   margin: auto;
   margin-top: 20vh;
-  padding: 10px;
+  padding: 30px;
   border-radius: 5%;
 }
 body #block h1, body #block h2, body #block ol {
