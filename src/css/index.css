@@ -3,17 +3,26 @@ body {
   background-size: cover;
   min-height: 100vh;
 }
+body .title {
+  text-align: center;
+  color: white;
+  background-color: red;
+  width: 200px;
+  margin: 20px auto;
+  border-radius: 5%;
+  font-family: monospace;
+}
 body #block {
   background-color: white;
   color: black;
   width: 400px;
   margin: auto;
-  margin-top: 20vh;
   padding: 30px;
   border-radius: 5%;
+  box-shadow: -10px 10px 5px black;
 }
-body #block h1, body #block h2, body #block ol {
-  margin: auto;
+body #block h1, body #block ol {
+  margin: 10px auto;
 }
 body #block button {
   margin: 5px;

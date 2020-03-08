@@ -12,19 +12,18 @@ import "./css/index.css"
 const theRoot = document.getElementById("root")
 
 //Math Questions
-const questions = ["8 * 1", "6 * 2", "34 + 34", "9 + 6", "2+2",
-                 "9 * 9", "23 * 34", "12 + 1", "17 - 102", "3 *34"]
+const questions = ["8 * 1", "6 * 2", "34 + 34", "9 + 6", "2 + 2",
+                 "9 * 9", "23 * 34", "12 + 1", "17 - 102", "3 * 34"]
 
 function Button(props){
     return(
     <button 
         className="btn-danger"
-
         onClick={() => {
             props.checkAnswer(props.theCorrectAnswer,props.theShuffledChoices[props.id] )
-            props.updateQuestion()}
-        }
-            >{props.theShuffledChoices[props.id]}
+            props.updateQuestion()}}
+    >
+        {props.theShuffledChoices[props.id]}        
     </button>
     )
 }
@@ -48,42 +47,17 @@ function Answers(props){
     return(
         <div className="row">
         <ol>
-                <li>
-                    <Button 
-                        id={0} 
-                        checkAnswer = {props.checkAnswer} 
-                        theCorrectAnswer = {correctAnswer}
-                        theShuffledChoices = {shuffledChoices}  
-                        updateQuestion = {props.updateQuestion}
-                    />
-                </li>
+            {[0,1,2,3].map((id) => (
                 <li>
                 <Button 
-                        id={1} 
-                        checkAnswer = {props.checkAnswer} 
-                        theCorrectAnswer = {correctAnswer}
-                        theShuffledChoices = {shuffledChoices}  
-                        updateQuestion = {props.updateQuestion}
-                    />
-                </li>
-                <li>
-                <Button 
-                        id={2} 
-                        checkAnswer = {props.checkAnswer} 
-                        theCorrectAnswer = {correctAnswer}
-                        theShuffledChoices = {shuffledChoices}  
-                        updateQuestion = {props.updateQuestion}
-                    />
-                </li>
-                <li>
-                <Button 
-                        id={3} 
-                        checkAnswer = {props.checkAnswer} 
-                        theCorrectAnswer = {correctAnswer}
-                        theShuffledChoices = {shuffledChoices}  
-                        updateQuestion = {props.updateQuestion}
-                    />
-                </li>
+                  id={id} 
+                  checkAnswer={props.checkAnswer} 
+                  theCorrectAnswer={correctAnswer}
+                  theShuffledChoices={shuffledChoices}  
+                  updateQuestion={props.updateQuestion}
+                />
+              </li>
+            ))}
         </ol>
        </div>
     )
@@ -92,7 +66,7 @@ function Answers(props){
 function Correct(props){
     return(
         <div className="row">
-            <h2>Correct Answers: {props.correctAnswers} </h2>
+            <h5>Correct Answers: {props.correctAnswers} </h5>
         </div>
     )
 }
@@ -100,7 +74,7 @@ function Correct(props){
 function Incorrect(props){
     return (
         <div className="row">
-            <h2>Incorrect Answers: {props.incorrectAnswers}</h2>
+            <h5>Incorrect Answers: {props.incorrectAnswers}</h5>
         </div>
     )
 }
@@ -137,29 +111,37 @@ class Quiz extends React.Component{
 
         if(this.state.questionNumber === questions.length){
             return (
-                <div id="block">
-                    <h4>This is the end of The Quiz Your scores are:</h4>
-                    <h5>Correct Answers: {this.state.correctAnswers}</h5>
-                    <h5>Incorrect Answer: {this.state.incorrectAnswers}</h5>
+                <div>
+                    <h1 className="title">Math Quiz</h1>
+                    <div id="block">
+                        <h4>You Scored:</h4>
+                        <h5>Correct Answers: {this.state.correctAnswers}</h5>
+                        <h5>Incorrect Answer: {this.state.incorrectAnswers}</h5>
+                    </div>
                 </div>
             )
         }
+        
         return(
-            <div id="block">
-                <Question 
-                questionNumber={this.state.questionNumber}
-                 theQuestions ={this.state.theQuestions.questions[this.state.questionNumber]} />
+            <div>
+                <h1 className="title">Math Quiz</h1>
+                <div id="block">
+                    <Question 
+                    questionNumber={this.state.questionNumber}
+                    theQuestions ={this.state.theQuestions.questions[this.state.questionNumber]} />
 
-                <Answers  
-                questionNumber ={this.state.questionNumber} 
-                theQuestions = {this.state.theQuestions.questions[this.state.questionNumber]}
-                checkAnswer = {this.checkAnswer}
-                updateQuestion = {this.updateQuestion}/>
+                    <Answers  
+                    questionNumber ={this.state.questionNumber} 
+                    theQuestions = {this.state.theQuestions.questions[this.state.questionNumber]}
+                    checkAnswer = {this.checkAnswer}
+                    updateQuestion = {this.updateQuestion}/>
 
-                <Correct correctAnswers ={this.state.correctAnswers} />
+                    <Correct correctAnswers ={this.state.correctAnswers} />
 
-                <Incorrect incorrectAnswers = {this.state.incorrectAnswers}/>
+                    <Incorrect incorrectAnswers = {this.state.incorrectAnswers}/>
+                </div>
             </div>
+           
         )
     }
 }
